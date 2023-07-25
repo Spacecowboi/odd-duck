@@ -94,7 +94,7 @@ createProduct('pen', 'img/pen.jpg');
 createProduct('pet-sweep', 'img/pet-sweep.jpg');
 createProduct('scissors', 'img/scissors.jpg');
 createProduct('shark', 'img/shark.jpg');
-createProduct('sweep', 'img/sweep.jpg');
+createProduct('sweep', 'img/sweep.png');
 createProduct('tauntaun', 'img/tauntaun.jpg');
 createProduct('unicorn', 'img/unicorn.jpg');
 createProduct('water-can', 'img/water-can.jpg');
