@@ -1,5 +1,10 @@
+@font-face {
+  font-family: 'vaporwave';
+  src: url('fonts/SFAlienEncounters.ttf') format('truetype');
+ }
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'vaporwave', Arial, sans-serif;
     margin: 0;
     padding: 0;
     background: linear-gradient(135deg, #f368e0, #c048c0, #833ab4, #a844a4, #e2439f, #f368e0);
@@ -27,6 +32,7 @@ body {
   
   h1 {
     text-align: center;
+    font-family: 'vaporwave', sans-serif;
   }
   
   #productBox {
@@ -65,10 +71,10 @@ body {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
+    font-family: 'vaporwave', Arial, sans-serif;
   }
   
   #viewResults:hover {
     background-color: #0056b3;
   }
-  
   

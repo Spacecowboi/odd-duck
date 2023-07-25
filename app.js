@@ -49,6 +49,8 @@ function showProducts(){
       product.timesClicked++;
       console.log(product.name + ' clicked! Votes: ' + product.timesClicked);
       showProducts;
+      voteCheck();
+      showProducts();
     });
     productBox.appendChild(imgElement);
   });
@@ -100,7 +102,7 @@ createProduct('wine-glass', 'img/wine-glass.jpg');
 
 //voting rounds
 let rounds = 0;
-let maxRounds = 5; //testing purposes
+let maxRounds = 20; //testing purposes
 
 // Event Listener for results
 document.getElementById('viewResults').addEventListener('click',function() {
@@ -109,28 +111,25 @@ document.getElementById('viewResults').addEventListener('click',function() {
   //remove the event listeners on the images after they have been voted on
   let productImages = document.querySelectorAll('#productBox img');
   productImages.forEach(function(img) {
-    img.removeEventListener('click', clickEvent);
+    let product = getProductByName(img.alt);
+    img.removeEventListener('click', function() {
+      product.timesClicked++;
+      console.log(product.name + ' clicked! Votes: ' + product.timesClicked);
+      voteCheck();
+      showProducts();
+    });
   });
   console.log('View Clicks! Voting is over.');
 });
 
+//getting the product by name
+function getProductByName(name){
+  return products.find((product) => product.name === name);
+}
 
 //Start votes
 showProducts();
 
-
-function clickEvent(){
-  this.timesClicked++;
-  console.log(this.name + ' clicked! Votes: ' + this.timesClicked);
-  showProducts();
-}
-
-function addClickListeners() {
-  let productImages = document.querySelectorAll('#productBox img');
-  productImages.forEach(function(img){
-    img.addEventListener('click', clickEvent);
-  });
-}
 //Check if votes are completed
 function voteCheck(){
   rounds++;
@@ -142,5 +141,4 @@ function voteCheck(){
   }
 }
 
-addClickListeners();
 voteCheck();
