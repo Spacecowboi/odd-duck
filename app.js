@@ -16,20 +16,31 @@ function createProduct(name, imageSource){
   let product = new Product(name, imageSource);
   products.push(product);
 }
+
+let currentRoundProducts = [];
+// let previousRoundProducts = [];
+
 // randomly get three unique products for display
 function getRandomProducts(){
   let uniqueProducts = [];
   let productCount = products.length;
+  // let allSeenProducts = currentRoundProducts.concat(previousRoundProducts);
 
   while(uniqueProducts.length < 3) {
     let randomIndex = Math.floor(Math.random() * productCount);
     let randomProduct = products[randomIndex];
 
-    if (!uniqueProducts.includes(randomProduct)){
+    if (!currentRoundProducts.includes(randomProduct) && !uniqueProducts.includes(randomProduct)) {
       uniqueProducts.push(randomProduct);
       randomProduct.timesShown++;
     }
   }
+  console.log('UNIQUE PRODUCTS', uniqueProducts, 'CURRENT ROUND PRODUCTS', currentRoundProducts);
+  //This clones the currentRoundProducts array INTO the previous rounds array before updating it. Please god work 
+  // currentRoundProducts = [];
+
+  // populate an empty array with the seen unique products
+  currentRoundProducts = uniqueProducts.slice();
   return uniqueProducts;
 }
 
@@ -40,7 +51,7 @@ function showProducts(){
   productBox.innerHTML = '';
 
   let randomProducts = getRandomProducts();
-
+  console.log(randomProducts, currentRoundProducts);
   randomProducts.forEach(function(product){
     let imgElement = document.createElement('img');
     imgElement.src = product.imageSource;
@@ -48,9 +59,8 @@ function showProducts(){
     imgElement.addEventListener('click', function(){
       product.timesClicked++;
       console.log(product.name + ' clicked! Votes: ' + product.timesClicked);
-      showProducts;
-      voteCheck();
       showProducts();
+      voteCheck();
     });
     productBox.appendChild(imgElement);
   });
@@ -134,7 +144,10 @@ showProducts();
 function voteCheck(){
   rounds++;
   if(rounds <= maxRounds) {
-    showProducts();
+
+    //Updating the previous product array with the current round products
+    // previousRoundProducts = currentRoundProducts.slice();
+
   } else {
     displayResults();
     console.log('All voting complete!');
